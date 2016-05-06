@@ -87,6 +87,9 @@ endfun
 map ,. :call ShowWhiteSpace() <CR>
 map ,- :call HideWhiteSpace() <CR>
 
+" -- underline current line
+map ,u :set cursorline<CR>
+
 set ruler
 
 
@@ -97,23 +100,12 @@ set ruler
 
 " -- syntax highlighting should be on
 syntax on
+let &t_Co=256
 
 " -- select a color scheme
 colorscheme desert
+silent! colorscheme blackboard
 
-if has("terminfo")
-  " num colors
-  set t_Co=16
-  " set foreground/background (ANSI)
-  set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
-  set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
-else
-  " num colors
-  set t_Co=16
-  " set foreground/background
-  set t_Sf=[3%dm
-  set t_Sb=[4%dm
-endif
 
 
 
@@ -161,7 +153,7 @@ map ,h :nohlsearch<CR>
 " -----------------------------------------------
 set wildmode=longest,list,full
 set wildmenu
-set tags=tags;/
+set tags=vimtags;/
 " -- jump to definition: ,a
 map ,a g]
 " -- jump back: ,s
@@ -210,10 +202,17 @@ nnoremap <C-Down> <C-x>
 
 " -- git diff for current file
 map ,d :!git diff %<CR>
+" -- git log for current file
+map ,l :!git log %<CR>
+" -- git blame for current file
+map ,b :!git blame %<CR>
 
 " -- tabs
-map ,b :tabnew
 " -- jump one tab to the left
 nnoremap ,<Left> :tabn<CR>
 " -- jump one tab to the left
 nnoremap ,<Right> :tabp<CR>
+" -- open filename(:linenumber) under cursor in a new tab
+" -- e.g. main.cpp:34
+nnoremap ,o <C-w>gF
+
