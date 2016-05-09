@@ -107,6 +107,12 @@ colorscheme desert
 " -- try to use blackboard - a non-standard color scheme
 silent! colorscheme blackboard
 
+" -- dark gray separators in splits and folds
+highlight VertSplit ctermfg=16 ctermbg=238
+highlight StatusLine ctermfg=238 ctermbg=white
+highlight StatusLineNC ctermfg=238 ctermbg=white
+highlight Folded ctermfg=242 ctermbg=16
+
 
 
 
