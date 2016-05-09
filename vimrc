@@ -104,6 +104,7 @@ let &t_Co=256
 
 " -- select a color scheme
 colorscheme desert
+" -- try to use blackboard - a non-standard color scheme
 silent! colorscheme blackboard
 
 
@@ -137,7 +138,9 @@ map ,v :r /tmp/clipboard<CR>
 " -----------------------------------------------
 " -- search behavior
 " -----------------------------------------------
+" -- incremental search
 set incsearch
+" -- highlight matches
 set hlsearch
 map ,h :nohlsearch<CR>
 
@@ -153,10 +156,11 @@ map ,h :nohlsearch<CR>
 " -----------------------------------------------
 set wildmode=longest,list,full
 set wildmenu
+" -- search for the tags file towards the root of the file system
 set tags=vimtags;/
-" -- jump to definition: ,a
+" -- jump to definition: ,a (push on stack)
 map ,a g]
-" -- jump back: ,s
+" -- jump back: ,s (pop from stack)
 map ,s <C-T>
 inoremap <Nul> <C-n>
 " -- open taglist browser column: ,t
@@ -171,6 +175,14 @@ set autowrite
 
 " -- write swap files to this directory
 set dir=>~/.vimswap
+
+" -- remember last editing position
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1
+      \ && line("'\"") <= line("$")
+      \ | exe "normal! g'\""
+      \ | endif
+endif
 
 " -- use bash for as command line
 set shell=/bin/bash
