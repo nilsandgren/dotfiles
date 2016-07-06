@@ -171,6 +171,8 @@ map ,s <C-T>
 inoremap <Nul> <C-n>
 " -- open taglist browser column: ,t
 map ,t :TlistToggle<CR>
+" -- don't scan #include files for symbols
+" set complete-=i
 
 
 
@@ -230,7 +232,23 @@ map ,b :!git blame %<CR>
 nnoremap ,<Left> :tabn<CR>
 " -- jump one tab to the left
 nnoremap ,<Right> :tabp<CR>
+
 " -- open filename(:linenumber) under cursor in a new tab
 " -- e.g. main.cpp:34
 nnoremap ,o <C-w>gF
 
+" -- Recursive grep for a word in the current directory. The
+"    result is presented in a new tab with each match prefixed with
+"    <filename>:<line number> to work with ,o mapping.
+function FindReferences(searchString)
+  " execute grep command and store output
+  let cmd = 'grep -Iinr ' . a:searchString
+  let output = system(cmd)
+  " create new tab with output
+  tabe
+  call setline(line('.'), getline('.') . output)
+  " replace null-byte with \r (newline in vim)
+  %s/[[:cntrl:]]/\r/g
+endfunction
+
+map ,g :call FindReferences(expand('<cword>'))<CR>
