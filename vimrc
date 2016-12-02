@@ -206,6 +206,24 @@ map ,; :s/;/\r{\r}\r<CR>:nohlsearch<CR>
 nnoremap <C-Up> <C-a>
 nnoremap <C-Down> <C-x>
 
+" -- show hexadecimal representation of current word
+fun! ShowAsHex(decString)
+  echohl ModeMsg
+  let output = printf("Hex: 0x%04x", a:decString)
+  echo output
+  echohl none
+endfun
+map "h :call ShowAsHex(expand('<cword>')) <CR>
+
+" -- show decimal representation of current word
+fun! ShowAsDec(hexString)
+  echohl ModeMsg
+  let output = printf("Dec: %u", a:hexString)
+  echo output
+  echohl none
+endfun
+map "d :call ShowAsDec(expand('<cword>')) <CR>
+
 
 " -- git diff for current file
 map ,d :!git diff %<CR>
