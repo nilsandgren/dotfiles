@@ -50,25 +50,6 @@ fun! NormIndent()
 endfun
 map ,G :call NormIndent() <CR>
 
-" GNU Intentation
-" Select lines and press ,g to indent
-"
-" int main()
-" {
-"   if(a == b)
-"     {
-"       c = func();
-"     }
-" }
-"
-fun! GnuIndent()
-  setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
-  setlocal shiftwidth=1
-  setlocal tabstop=8
-endfun
-map ,g :call GnuIndent() <CR>
-
-
 
 " -----------------------------------------------
 " -- the look
@@ -151,6 +132,12 @@ set hlsearch
 map ,h :nohlsearch<CR>
 
 
+" -----------------------------------------------
+" -- command completion
+" -----------------------------------------------
+set wildmode=longest,list,full
+set wildmenu
+
 
 " -----------------------------------------------
 " -- code completion: tags and the taglist plugin
@@ -160,8 +147,6 @@ map ,h :nohlsearch<CR>
 " --   http://vim.sourceforge.net/scripts/script.php?script_id=273
 " --
 " -----------------------------------------------
-set wildmode=longest,list,full
-set wildmenu
 " -- search for the tags file towards the root of the file system
 set tags=vimtags;/
 " -- jump to definition: ,a (push on stack)
@@ -180,6 +165,7 @@ map ,t :TlistToggle<CR>
 " -- misc goodies
 " -----------------------------------------------
 set autowrite
+set nocp
 
 " -- write swap files to this directory
 set dir=>~/.vimswap
@@ -220,6 +206,7 @@ map ,; :s/;/\r{\r}\r<CR>:nohlsearch<CR>
 nnoremap <C-Up> <C-a>
 nnoremap <C-Down> <C-x>
 
+
 " -- git diff for current file
 map ,d :!git diff %<CR>
 " -- git log for current file
@@ -245,7 +232,7 @@ function FindReferences(searchString)
   let cmd = 'grep -Iinr ' . a:searchString
   let output = system(cmd)
   " create new tab with output
-  tabe
+  tabe Search\ results
   call setline(line('.'), getline('.') . output)
   " replace null-byte with \r (newline in vim)
   %s/[[:cntrl:]]/\r/g
