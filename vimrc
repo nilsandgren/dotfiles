@@ -149,10 +149,13 @@ set wildmenu
 " -----------------------------------------------
 " -- search for the tags file towards the root of the file system
 set tags=vimtags;/
-" -- jump to definition: ,a (push on stack)
+" -- jump to definition (push on stack): ,a or Ctrl+Down
 map ,a g]
-" -- jump back: ,s (pop from stack)
+map <C-Down> g]
+" -- jump back (pop from stack): ,s or Ctrl+Up
 map ,s <C-T>
+map <C-Up> <C-T>
+
 inoremap <Nul> <C-n>
 " -- open taglist browser column: ,t
 map ,t :TlistToggle<CR>
@@ -201,10 +204,6 @@ map ,B :s:\s*$::<CR>
 
 " -- semicolon to braces
 map ,; :s/;/\r{\r}\r<CR>:nohlsearch<CR>
-
-" -- increase and decrease numbers with ctrl + up/down arrows!
-nnoremap <C-Up> <C-a>
-nnoremap <C-Down> <C-x>
 
 " -- show hexadecimal representation of current word
 fun! ShowAsHex(decString)
