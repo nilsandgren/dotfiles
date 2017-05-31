@@ -256,12 +256,17 @@ map "d :call ShowAsDec(expand('<cword>')) <CR>
 " -----------------------------------------------
 " -- git
 " -----------------------------------------------
+" -- git command on current file
+fun! GitCommand(command)
+  silent! !clear
+  exec "!git " . a:command . " %"
+endfun
 " -- git diff for current file
-map <leader>d :!git diff %<CR>
+map <leader>d :call GitCommand("diff") <CR>
 " -- git log for current file
-map <leader>l :!git log -p %<CR>
+map <leader>l :call GitCommand("log -p") <CR>
 " -- git blame for current file
-map <leader>b :!git blame %<CR>
+map <leader>b :call GitCommand("blame") <CR>
 
 
 " -----------------------------------------------
