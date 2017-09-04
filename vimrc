@@ -22,6 +22,16 @@ set shell=/bin/bash
 " -- write swap files to this directory
 set dir=>~/.vimswap
 
+" -- handle xterm-style Ctrl+arrow sequences
+" -- check term to see if tmux/screen is used
+if &term =~ '^screen'
+    " -- tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 
 
 " -----------------------------------------------
@@ -126,8 +136,11 @@ set wildmenu
 set tags=/home/nilsa/git/monorepo/tags-edgeware
 " -- jump to definition (push on stack): <leader>a
 map <leader>a g]
+map <C-Down> g]
+
 " -- jump back (pop from stack): <leader>s
-map <leader>s <C-T>
+map <leader>s <C-T> 
+map <C-Up> <C-T>
 
 inoremap <Nul> <C-n>
 " -- open taglist browser column: ,t
@@ -197,6 +210,11 @@ nnoremap <leader>o <C-w>gF
 " -----------------------------------------------
 " -- misc goodies
 " -----------------------------------------------
+
+" -- Ctrl + arrow to switch tab
+"    Requires 
+map <C-Left> gT
+map <C-Right> gt
 
 " -- show current C/C++ function
 fun! ShowFuncName()
