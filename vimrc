@@ -33,7 +33,6 @@ if &term =~ '^screen'
 endif
 
 
-
 " -----------------------------------------------
 " -- text flow
 " -----------------------------------------------
@@ -90,10 +89,16 @@ colorscheme desert
 silent! colorscheme blackboard
 
 " -- dark gray separators in splits and folds
-highlight VertSplit ctermfg=16 ctermbg=238
+highlight VertSplit ctermfg=234 ctermbg=242
 highlight StatusLine ctermfg=238 ctermbg=white
 highlight StatusLineNC ctermfg=238 ctermbg=white
-highlight Folded ctermfg=242 ctermbg=16
+highlight Folded ctermfg=242 ctermbg=234
+
+" -- colors when using vimdiff
+highlight DiffAdd    ctermbg=22
+highlight DiffDelete ctermbg=124
+highlight DiffChange ctermbg=238
+highlight DiffText   ctermbg=244
 
 
 " -----------------------------------------------
