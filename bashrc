@@ -37,10 +37,11 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
+    #xterm-color|*-256color) color_prompt=yes;;
     xterm-color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
+# comment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
@@ -71,18 +72,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -119,95 +108,5 @@ export PATH=${PATH}:~/android/android-sdk-linux/tools
 
 export EDITOR=/usr/bin/vim
 
-#EdgeWare stuff
-alias svlog='svn log --limit=1'
-# alias snow='xsnow -notrees -nosanta -norudolf -snowflakes 300 -xspeed 4 -yspeed 6 -wsnowdepth 10 -ssnowdepth 30 -nokeepsnow'
-# alias snow='xsnow -notrees -nosanta -norudolf -nokeepsnow'
-alias sf_ftp='ncftp -u telia_6 -p T3qH3L mediaftp.sfanytime.com'
-
-function mio_login()
-{
-    if ! [ $1 ]; then
-        ssh root@10.16.0.137
-    else
-        ssh root@10.16.0.$1
-    fi
-}
-alias mio='mio_login'
-alias wtv='ssh root@10.16.0.71'
-
-function color_st()
-{
-  git status "$1" | less -R
-}
-
-function mantis()
-{
-  if [ "$1" -ge "20000" ] ; then
-      gnome-open http://scyther.edgeware.tv/view.php?id=$1
-  else
-      gnome-open http://mantis.edgeware.tv/view.php?id=$1
-  fi
-}
-alias mant='mantis'
-
-function open_jira()
-{
-  gnome-open "https://edgeware.atlassian.net/browse/$1"
-}
-alias jira='open_jira'
-
-# typos
-alias ks='echo KOTTFARSSAS; ls'
-alias ös='echo As-Ösigt!; ls'
-alias bim='echo "Bim! Bim!"; sleep 1; vim'
-alias get='git'
-alias gut='git'
-
-# vim
-alias clear-vim-swap='rm -f ~/.vimswap/*'
-alias v='vim'
-alias ':e'='vim'
-
-# git
-alias gpr='git pull --rebase'
-alias gsu='git submodule update'
-alias gst='git status'
-alias gbr='git branch -avv | cut -c -97 | sed -e "s/$/.../g"'
-
-alias cd1='cd /home/nilsa/git/esb1001'
-alias cd2='cd /home/nilsa/git/monorepo/src/esb2001'
-alias cd4='cd /home/nilsa/git/esb1004'
-
-# cd to the currently most popular project
-alias cdc='cd /home/nilsa/git/monorepo'
-# cd to the (never popular) isagw project
-alias cdi='cd /home/nilsa/git/isa-gw'
-
-alias mb='ssh nilsa@miobuild'
-alias saturn='ssh nilsa@saturn'
-
-# create a directory and cd to it
-mkdir_cd()
-{
-  mkdir -p $1 && cd $1
-}
-alias mkcd='mkdir_cd'
-
-# fuzzy find
-fuzzy_find()
-{
-    find . -iname "*$1*"
-}
-alias f=fuzzy_find
-
-# "importante" file
-# grep from
-IMPORTANTE=/mnt/lithium/nilsa/Documents/importante.txt
-importante_grep()
-{
-  grep -i "$@" "$IMPORTANTE"
-}
-alias impgrep='importante_grep'
-# open
-alias vimimp='vim "$IMPORTANTE"'
+# Local stuff in .bash_profile
+. /home/nilsa/.bash_profile
