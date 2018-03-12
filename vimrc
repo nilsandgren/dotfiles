@@ -41,10 +41,12 @@ set cindent
 set smarttab
 " -- highlight matching braces
 set showmatch
+" -- four spaces for tabs
 set tabstop=4
 set shiftwidth=4
 " -- insert tabs as spaces
 set expandtab
+" -- round indent to shiftwidth
 set shiftround
 set nowrap
 " -- use syntax fold method, but set the level so
@@ -53,7 +55,7 @@ set foldmethod:syntax
 set foldlevelstart=20
 " -- i prefer case sensitivity
 set noignorecase
-" -- see NormIndent/GnuIndent further down
+" -- indentation
 set cinoptions=>4,:4,=4,l1,i4,p5,t0,(0,u0,w1,m1
 
 
@@ -72,7 +74,7 @@ fun! HideWhiteSpace()
   set list lcs=tab:\ \ ,trail:\ 
 endfun
 map <leader>. :call ShowWhiteSpace() <CR>
-map ,- :call HideWhiteSpace() <CR>
+map <leader>- :call HideWhiteSpace() <CR>
 
 " -- underline current line
 map ,u :set cursorline<CR>
