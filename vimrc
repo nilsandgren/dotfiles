@@ -10,6 +10,10 @@
 " -- use comma as leader
 let mapleader = ","
 
+" -- allow space to get into insert mode
+map <space> i
+
+
 " -- auto write when changing buffers etc
 set autowrite
 
@@ -48,6 +52,7 @@ set shiftwidth=4
 set expandtab
 " -- round indent to shiftwidth
 set shiftround
+" -- do not wrap lines
 set nowrap
 " -- use syntax fold method, but set the level so
 " -- high that it seems to be disabled
@@ -101,6 +106,10 @@ highlight DiffAdd    ctermbg=22
 highlight DiffDelete ctermbg=124
 highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=244
+
+" -- mark column 80 and 100
+highlight ColorColumn ctermbg=236 guibg=236
+set colorcolumn=80,100
 
 
 " -----------------------------------------------
