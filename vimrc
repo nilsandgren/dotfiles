@@ -20,7 +20,7 @@ set autowrite
 " -- not vi compatible
 set nocp
 
-" -- use bash for as command line
+" -- use bash command line
 set shell=/bin/bash
 
 " -- write swap files to this directory
@@ -82,7 +82,8 @@ map <leader>. :call ShowWhiteSpace() <CR>
 map <leader>- :call HideWhiteSpace() <CR>
 
 " -- underline current line
-map ,u :set cursorline<CR>
+map <leader>u :set cursorline<CR>
+map <leader>U :set nocursorline<CR>
 
 set ruler
 
@@ -105,7 +106,7 @@ highlight Folded ctermfg=242 ctermbg=234
 highlight DiffAdd    ctermbg=22
 highlight DiffDelete ctermbg=124
 highlight DiffChange ctermbg=238
-highlight DiffText   ctermbg=244
+highlight DiffText   ctermbg=242
 
 " -- mark column 80 and 100
 highlight ColorColumn ctermbg=236 guibg=236
