@@ -94,7 +94,7 @@ alias f=fuzzy_find
 IMPORTANTE=/home/nilsa/Documents/importante.txt
 importante_grep()
 {
-  grep -i "$@" "$IMPORTANTE"
+  grep -i -A2 "$@" "$IMPORTANTE"
 }
 alias impgrep='importante_grep'
 # open
@@ -119,3 +119,44 @@ copy_to_clipboard()
     xclip -sel clip < "${1}"
 }
 alias ctrl-c='copy_to_clipboard'
+
+gitc() {
+    # Get local branches as an array
+    # Remove white space and that '*'
+    BRANCHES=(`git branch | tr -d "\*" | tr -d " "`)
+    INDEX=1
+
+    # Display list of branches
+    echo
+    for BRANCH in "${BRANCHES[@]}"; do
+        printf "%3d: %s\n" "$INDEX" "$BRANCH"
+        INDEX=$((INDEX + 1))
+    done
+    echo
+
+    printf "  Enter a branch number: "
+    read USER_SELECTION
+
+    # Sanity check
+    NUMBER_REGEX='^[0-9]+$'
+    MIN_INDEX=1
+    MAX_INDEX=${#BRANCHES[@]}
+    if ! [[ $USER_SELECTION =~ $NUMBER_REGEX ]] ||
+         [[ $USER_SELECTION -lt $MIN_INDEX ]] ||
+         [[ $USER_SELECTION -gt $MAX_INDEX ]] ; then
+       echo "  Invalid index" >&2
+       return
+    fi
+
+    # Checkout the branch
+    echo
+    git checkout "${BRANCHES[$((USER_SELECTION - 1))]}"
+    echo
+}
+
+small_prompt() {
+    PS1='\u@\h:${PWD#"${PWD%/*/*}/"}\$ '
+}
+
+# pipe command to 'trim' to trim output to terminal width
+alias trim='cut -c1-$(stty size </dev/tty | cut -d" " -f2)'
