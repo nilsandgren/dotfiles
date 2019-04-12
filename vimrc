@@ -153,10 +153,12 @@ set wildmenu
 set tags=/home/nilsa/git/monorepo/tags-edgeware
 " -- jump to definition (push on stack): <leader>a
 map <leader>a g]
+" -- or with Ctrl+Down (see xterm-style further up)
 map <C-Down> g]
 
 " -- jump back (pop from stack): <leader>s
 map <leader>s <C-T> 
+" -- or with Ctrl+Up (see xterm-style further up)
 map <C-Up> <C-T>
 
 inoremap <Nul> <C-n>
