@@ -36,8 +36,8 @@ alias tags='/home/nilsa/bin/tags.sh'
 ######################
 # git
 alias gpr='git pull --rebase'
-alias gsu='git submodule update'
 alias gst='git status'
+alias gstv='git status --short | vim -'
 alias gbr='git branch'
 alias gca='git commit --amend'
 
@@ -53,6 +53,8 @@ alias cdn='cd /mnt/lithium/home/nils.andgren'
 alias orbit='ssh root@10.16.16.14'
 alias mb='ssh nilsa@miobuild'
 alias saturn='ssh nilsa@saturn'
+
+alias hh='hexdump -C -n 256'
 
 ######################
 # view bug tickets
@@ -71,6 +73,14 @@ function open_jira()
   gnome-open "https://jira.edgeware.tv/browse/$1" &> /dev/null
 }
 alias jira='open_jira'
+
+# open edgeware PR in specified repo
+# usage: pull <repo> <number>
+function open_pr()
+{
+  gnome-open "https://github.com/edgeware/${1}/pull/${2}"
+}
+alias pull='open_pr'
 
 ######################
 # misc
