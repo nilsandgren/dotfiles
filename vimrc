@@ -109,8 +109,12 @@ highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=242
 
 " -- mark column 80 and 100
-highlight ColorColumn ctermbg=236 guibg=236
+highlight ColorColumn ctermbg=235 guibg=235
 set colorcolumn=80,100
+" -- some extra guides for python
+au BufNewFile,BufRead,BufEnter
+    \ *.py
+    \ set colorcolumn=5,9,13,17,21,80,100
 
 
 " -----------------------------------------------
