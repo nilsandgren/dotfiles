@@ -168,5 +168,9 @@ small_prompt() {
     PS1='\u@\h:${PWD#"${PWD%/*/*}/"}\$ '
 }
 
+reset_prompt() {
+    PS1='\u@\h:\w\$ '
+}
+
 # pipe command to 'trim' to trim output to terminal width
 alias trim='cut -c1-$(stty size </dev/tty | cut -d" " -f2)'
