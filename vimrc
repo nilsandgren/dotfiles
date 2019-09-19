@@ -108,13 +108,18 @@ highlight DiffDelete ctermbg=124
 highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=242
 
-" -- mark column 80 and 100
+" -- mark column 80 and 100 in dark gray
 highlight ColorColumn ctermbg=235 guibg=235
 set colorcolumn=80,100
 " -- some extra guides for python
 au BufNewFile,BufRead,BufEnter
     \ *.py
     \ set colorcolumn=5,9,13,17,21,80,100
+
+" -- Highlight color when searching
+highlight Search ctermfg=red ctermbg=235
+" -- Highlight color for todos
+highlight Todo ctermfg=red ctermbg=235
 
 
 " -----------------------------------------------
