@@ -54,7 +54,7 @@ alias orbit='ssh root@10.16.16.14'
 alias mb='ssh nilsa@miobuild'
 alias saturn='ssh nilsa@saturn'
 
-alias hh='hexdump -C -n 256'
+alias hh='hexdump -v -C -n 256'
 
 ######################
 # view bug tickets
