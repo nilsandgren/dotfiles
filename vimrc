@@ -52,12 +52,18 @@ set shiftwidth=4
 set expandtab
 " -- round indent to shiftwidth
 set shiftround
-" -- do not wrap lines
+" -- do not generally wrap lines...
 set nowrap
+" -- ...but wrap text files
+au BufRead,BufNewFile *.txt,*.md set wrap linebreak nolist textwidth=0 wrapmargin=0
+
 " -- use syntax fold method, but set the level so
 " -- high that it seems to be disabled
 set foldmethod:syntax
 set foldlevelstart=20
+" -- use indent fold method for python files
+au BufNewFile,BufRead,BufEnter *.py set foldmethod:indent
+
 " -- i prefer case sensitivity
 set noignorecase
 " -- indentation
@@ -109,7 +115,7 @@ highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=242
 
 " -- mark column 80 and 100 in dark gray
-highlight ColorColumn ctermbg=235 guibg=235
+highlight ColorColumn ctermbg=234
 set colorcolumn=80,100
 " -- some extra guides for python
 au BufNewFile,BufRead,BufEnter
@@ -117,9 +123,9 @@ au BufNewFile,BufRead,BufEnter
     \ set colorcolumn=5,9,13,17,21,80,100
 
 " -- Highlight color when searching
-highlight Search ctermfg=red ctermbg=235
+highlight Search ctermfg=red ctermbg=234
 " -- Highlight color for todos
-highlight Todo ctermfg=red ctermbg=235
+highlight Todo ctermfg=red ctermbg=234
 
 
 " -----------------------------------------------
@@ -272,7 +278,13 @@ map <C-d><C-d> "_dd
 map <C-d> "_d
 
 " -- real tabs in make files
-autocmd BufEnter ?akefile* set noexpandtab
+autocmd BufNewFile,BufRead,BufEnter ?akefile* set noexpandtab
+
+" -- real tabs in golang files
+autocmd BufNewFile,BufRead,BufEnter *.go set noexpandtab
+
+" -- turn off syntax highlighting for markdown files
+" autocmd BufEnter *.md set syn=off
 
 " -- remove blanks at end of line
 map <leader>B :s:\s*$::<CR>
