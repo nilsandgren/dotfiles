@@ -165,7 +165,7 @@ set wildmenu
 " --   http://vim.sourceforge.net/scripts/script.php?script_id=273
 "
 " -- the tag file to use
-set tags=/home/nilsa/git/monorepo/tags-edgeware
+set tags=/home/nilsa/git/vim-tags
 " -- jump to definition (push on stack): <leader>a
 map <leader>a g]
 " -- or with Ctrl+Down (see xterm-style further up)
@@ -202,6 +202,8 @@ let OmniCpp_SelectFirstItem = 2
 " -----------------------------------------------
 "
 "  vim-build is a wrapper script around docker-make.
+"  https://github.com/nilsandgren/toolbox/blob/master/scripts/vim/vim-build
+"
 "  any tool that outputs a list of compiler errors can be used.
 "
 set makeprg=vim-build
@@ -291,6 +293,9 @@ map <leader>B :s:\s*$::<CR>
 
 " -- semicolon to braces
 map <leader> :s/;/\r{\r}\r<CR>:nohlsearch<CR>
+
+" -- reload file without mercy
+map <leader>r :edit!<CR>
 
 " -- show hexadecimal representation of current word
 fun! ShowAsHex(decString)
