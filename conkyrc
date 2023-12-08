@@ -1,0 +1,93 @@
+conky.config = {
+	update_interval = 2,
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	out_to_console = false,
+	override_utf8_locale = true,
+	double_buffer = true,
+	text_buffer_size = 32768,
+	imlib_cache_size = 0,
+	own_window = true,
+	own_window_type = 'normal',
+	own_window_argb_visual = true,
+	own_window_argb_value = 140,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	border_inner_margin = 5,
+	border_outer_margin = 5,
+	xinerama_head = 1,
+	alignment = 'bottom_right',
+	gap_x = 20,
+	gap_y = 46,
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+	use_xft = true,
+	font = 'Ubuntu Mono:size=10',
+	xftalpha = 0.8,
+	uppercase = false,
+	default_color = '#407Db9',
+	own_window_colour = '#000000',
+	minimum_width = 240, minimum_height = 0,
+	alignment = 'top_right',
+	no_buffers = true,
+};
+
+conky.text = [[
+${font Ubuntu:size=11}${time %Y-%m-%d}${alignr}${time %H:%M}
+
+############################## SYSTEM ##########################
+${color #444444}${hr}$color
+${font Ubuntu:size=13}SYSTEM ${font}
+$sysname $kernel $alignr $machine
+Host:$alignr$nodename
+Uptime:$alignr$uptime
+File System: $alignr${fs_type}
+Processes: $alignr ${execi 1000 ps aux | wc -l}
+
+############################## CPU #############################
+${color #444444}${hr}$color
+${font Ubuntu:size=13}CPU ${font}
+${execi 1000 grep model /proc/cpuinfo | cut -d : -f2 | tail -1 | sed 's/\s//'}
+${cpugraph cpu0 40,240 112806 93121C -t}
+CPU usage:${alignr}${cpu cpu0}% / 100%
+Load average:${alignr}${loadavg}
+
+############################## MEMORY ##########################
+${color #444444}${hr}$color
+${font Ubuntu:size=13}MEMORY ${font}
+${memgraph 40,240 112806 93121C -t}
+RAM used $alignr $mem / $memmax
+${color #93121C}${membar}${color}
+
+############################## STORAGE #########################
+${color #444444}${hr}$color
+${font Ubuntu:size=13}STORAGE ${font}
+Read: ${diskio_read} ${alignr}Write: ${diskio_write} 
+${diskiograph_read 36,120 112806 93121C -t} ${alignr}${diskiograph_write 36,120 112806 93121C -t}${color}
+/ $alignr ${fs_used /} / ${fs_size /}
+${color #93121C}${fs_bar}${color}
+
+############################## NETWORK #########################
+${color #444444}${hr}$color
+${font Ubuntu:size=13}NETWORK ${font}
+
+# ${font Ubuntu:size=12}Wired${font}
+# Interface:${alignr}enx846993452983
+# Down: ${downspeed enx846993452983}  ${alignr}Up: ${upspeed enx846993452983} 
+# ${downspeedgraph enx846993452983 36,120 112806 93121C -t} ${alignr}${upspeedgraph enx846993452983 36,120 112806 93121C -t}$color
+${font Ubuntu Mono:size=12}WiFi${font}
+Interface:${alignr}wlp0s20f3
+SSID:${alignr}${exec /home/nilsa/bin/wifi ssid}
+Quality:${alignr}${exec /home/nilsa/bin/wifi}
+Down: ${downspeed wlp0s20f3}  ${alignr}Up: ${upspeed wlp0s20f3}
+${downspeedgraph wlp0s20f3 36,120 112806 93121C 1000000 -t} ${alignr}${upspeedgraph wlp0s20f3 36,120 112806 93121C 1000000 -t}$color
+
+############################## PROCESSES #######################
+${color #444444}${hr}$color
+${font Ubuntu:size=13}PROCESSES ${font}
+Name $alignr CPU%    MEM%
+${top name 1} $alignr ${top cpu 1}% ${top mem 1}%
+${top name 2} $alignr ${top cpu 2}% ${top mem 2}%
+${top name 3} $alignr ${top cpu 3}% ${top mem 3}%
+${top name 4} $alignr ${top cpu 4}% ${top mem 4}%]];
