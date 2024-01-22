@@ -263,6 +263,16 @@ fun! ShowFuncName()
 endfun
 map <leader>f :call ShowFuncName() <CR>
 
+" -- clang-format current buffer
+function FormatBuffer()
+  if !empty(findfile('.clang-format', expand('%:p:h') . ';'))
+    let cursor_pos = getpos('.')
+    :%!clang-format
+    call setpos('.', cursor_pos)
+  endif
+endfunction
+map <leader>F :call FormatBuffer() <CR>
+
 " -- remember last editing position
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1
