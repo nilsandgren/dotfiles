@@ -101,6 +101,8 @@ let &t_Co=256
 colorscheme desert
 " -- try to use blackboard - a non-standard color scheme
 silent! colorscheme blackboard
+" -- too much comments in our code, so fading them a bit
+highlight Comment ctermfg=242
 
 " -- dark gray separators in splits and folds
 highlight VertSplit ctermfg=234 ctermbg=242
@@ -114,9 +116,9 @@ highlight DiffDelete ctermbg=124
 highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=242
 
-" -- mark column 80 and 100 in dark gray
-highlight ColorColumn ctermbg=234
-set colorcolumn=80,100
+" -- mark column 80, 100 & 120 in dark gray
+highlight ColorColumn ctermbg=236
+set colorcolumn=80,100,120
 " -- some extra guides for python
 au BufNewFile,BufRead,BufEnter
     \ *.py
@@ -201,7 +203,7 @@ let OmniCpp_SelectFirstItem = 2
 " -- build results in quickfix list
 " -----------------------------------------------
 "
-"  vim-build is a wrapper script around docker-make.
+"  vim-build is a wrapper script around the build command
 "  https://github.com/nilsandgren/toolbox/blob/master/scripts/vim/vim-build
 "
 "  any tool that outputs a list of compiler errors can be used.
@@ -216,7 +218,7 @@ fun! VimBuild()
     " invoke vim-build with the argument 'build'
     make build
     " open quickfix list if it has any content
-    cwindow
+    cwindow 14
 endfun
 " -- make with <leader>m
 map <leader>m :call VimBuild()<cr>
