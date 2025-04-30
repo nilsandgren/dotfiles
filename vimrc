@@ -40,8 +40,6 @@ endif
 " -----------------------------------------------
 " -- text flow
 " -----------------------------------------------
-set autoindent
-set cindent
 set smarttab
 " -- highlight matching braces
 set showmatch
@@ -67,7 +65,12 @@ au BufNewFile,BufRead,BufEnter *.py set foldmethod:indent
 " -- i prefer case sensitivity
 set noignorecase
 " -- indentation
+set autoindent
+set cindent
 set cinoptions=>4,:4,=4,l1,i4,p5,t0,(0,u0,w1,m1
+set cinkeys-=0#
+set indentkeys-=0#
+
 
 
 " -----------------------------------------------
@@ -116,18 +119,22 @@ highlight DiffDelete ctermbg=124
 highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=242
 
-" -- mark column 80, 100 & 120 in dark gray
+" -- mark column 100 & 120 in dark gray
 highlight ColorColumn ctermbg=236
-set colorcolumn=80,100,120
-" -- some extra guides for python
+set colorcolumn=100,120
+" -- 80 & 100 for python
 au BufNewFile,BufRead,BufEnter
     \ *.py
-    \ set colorcolumn=5,9,13,17,21,80,100
+    \ set colorcolumn=80,100
 
 " -- Highlight color when searching
 highlight Search ctermfg=red ctermbg=234
 " -- Highlight color for todos
 highlight Todo ctermfg=red ctermbg=234
+
+" -- Colors for menus, e.g. tab completion popup
+highlight Pmenu ctermfg=lightgray ctermbg=234
+highlight PmenuSel ctermfg=white ctermbg=234
 
 
 " -----------------------------------------------
@@ -195,8 +202,8 @@ au BufNewFile,BufRead,BufEnter
 " -- insert first candidate into text buffer
 let OmniCpp_SelectFirstItem = 2
 " -- hide preview window when candidate has been inserted
-" autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 
 " -----------------------------------------------
