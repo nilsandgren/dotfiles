@@ -77,6 +77,9 @@ set indentkeys-=0#
 " -- the look
 " -----------------------------------------------
 
+set number
+" -- set relativenumber
+
 " -- do not expose whitespace by default
 set list lcs=tab:\ \ ,trail:\ 
 
@@ -127,16 +130,6 @@ au BufNewFile,BufRead,BufEnter
     \ *.py
     \ set colorcolumn=80,100
 
-" -- Highlight color when searching
-highlight Search ctermfg=red ctermbg=234
-" -- Highlight color for todos
-highlight Todo ctermfg=red ctermbg=234
-
-" -- Colors for menus, e.g. tab completion popup
-highlight Pmenu ctermfg=lightgray ctermbg=234
-highlight PmenuSel ctermfg=white ctermbg=234
-
-
 " -----------------------------------------------
 " -- copy and paste using a clipboard file
 " -----------------------------------------------
@@ -174,20 +167,29 @@ set wildmenu
 " --   http://vim.sourceforge.net/scripts/script.php?script_id=273
 "
 " -- the tag file to use
-set tags=/home/nilsa/git/vim-tags
-" -- jump to definition (push on stack): <leader>a
-map <leader>a g]
-" -- or with Ctrl+Down (see xterm-style further up)
-map <C-Down> g]
+set tags=/home/nan/vim-tags
 
-" -- jump back (pop from stack): <leader>s
-map <leader>s <C-T> 
-" -- or with Ctrl+Up (see xterm-style further up)
+" -- jump to definition (push on stack)
+map <leader>a g]
+map <C-Down> g]
+" -- jump back (pop from stack)
+map <leader>s <C-T>
 map <C-Up> <C-T>
 
+" -- resizing
+map <S-Up> <cmd>resize +2<CR>
+map <S-Down> <cmd>resize -2<CR>
+map <S-Left> <cmd>vertical resize -2<CR>
+map <S-Right> <cmd>vertical resize +2<CR>
+
 inoremap <Nul> <C-n>
-" -- open taglist browser column: ,t
-map <leader>t :TlistToggle<CR>
+
+" -- toggle taglist browser
+map <leader>T :TlistToggle<CR>
+" -- toggle NERDTree
+map <leader>e :NERDTreeToggle<CR>
+map <leader>t :NERDTreeToggle<CR>
+
 " -- don't scan #include files for symbols
 set complete-=i
 
@@ -195,12 +197,20 @@ set complete-=i
 "    http://www.vim.org/scripts/script.php?script_id=1520
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
-" -- the file types
+
+" -- c
 au BufNewFile,BufRead,BufEnter
     \ *.cpp,*.cc,*.c,*.hpp,*.hh,*.h
     \ set omnifunc=omni#cpp#complete#Main
+
+" -- rust
+au BufNewFile,BufRead,BufEnter
+    \ *.rs
+    \ set omnifunc=syntaxcomplete#Complete
+
 " -- insert first candidate into text buffer
 let OmniCpp_SelectFirstItem = 2
+
 " -- hide preview window when candidate has been inserted
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -209,21 +219,14 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " -----------------------------------------------
 " -- build results in quickfix list
 " -----------------------------------------------
-"
-"  vim-build is a wrapper script around the build command
-"  https://github.com/nilsandgren/toolbox/blob/master/scripts/vim/vim-build
-"
-"  any tool that outputs a list of compiler errors can be used.
-"
-set makeprg=vim-build
+set makeprg=rustc
 fun! VimBuild()
     " clear quickfix list
     call setqflist([])
     " clear scratch buffer without echoing "Press ENTER..."
     silent! !clear
     silent! !echo "Building..."
-    " invoke vim-build with the argument 'build'
-    make build
+    make
     " open quickfix list if it has any content
     cwindow 14
 endfun
@@ -247,7 +250,7 @@ fun! QuickFixGrep(pattern)
 endfun
 nnoremap <leader>g :call QuickFixGrep(expand("<cword>")) <CR>
 
-" -- edit filename(:linenumber) (e.g. main.cpp:34) under 
+" -- edit filename(:linenumber) (e.g. main.cpp:34) under
 " -- cursor in a new tab. useful when dealing with grep output
 nnoremap <leader>o <C-w>gF
 
@@ -256,31 +259,29 @@ nnoremap <leader>o <C-w>gF
 " -- misc goodies
 " -----------------------------------------------
 
-" -- Ctrl + arrow to switch tab
-"    Requires 
+" -- Switch tabs
 map <C-Left> gT
 map <C-Right> gt
 
-" -- show current C/C++ function
-fun! ShowFuncName()
-  let lnum = line(".")
-  let col = col(".")
-  echohl ModeMsg
-  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
-  echohl None
-  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+
+" -- rustfmt current buffer
+fun! RustFormat()
+  let cursor_pos = getpos('.')
+  :%!rustfmt %
+  :e!
+  call setpos('.', cursor_pos)
 endfun
-map <leader>f :call ShowFuncName() <CR>
+map <leader>f :call RustFormat() <CR>
 
 " -- clang-format current buffer
-function FormatBuffer()
+function ClangFormat()
   if !empty(findfile('.clang-format', expand('%:p:h') . ';'))
     let cursor_pos = getpos('.')
     :%!clang-format
     call setpos('.', cursor_pos)
   endif
 endfunction
-map <leader>F :call FormatBuffer() <CR>
+map <leader>F :call ClangFormat() <CR>
 
 " -- remember last editing position
 if has("autocmd")
