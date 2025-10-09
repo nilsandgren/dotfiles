@@ -1,6 +1,3 @@
-" nilsa color scheme - based on blackboard by Ben Wyrosdick
-"
-
 set background=dark
 hi clear
 if exists("syntax_on")
@@ -10,13 +7,18 @@ endif
 let g:colors_name = "nilsa"
 
 " Basics
-highlight Normal ctermfg=45
+highlight Normal ctermfg=152
 highlight Comment ctermfg=248
-highlight Constant ctermfg=72
+highlight Constant ctermfg=71
 highlight LineNr ctermfg=240
+highlight Type ctermfg=112
+highlight Special ctermfg=246
+highlight Identifier ctermfg=36
+highlight Function ctermfg=36
+highlight PreProc ctermfg=37
 
 " Searching
-highlight Search ctermfg=white ctermbg=234
+highlight Search ctermfg=166 ctermbg=black
 
 " Todos
 highlight Todo ctermfg=red ctermbg=234
