@@ -1,0 +1,60 @@
+[global_config]
+[keybindings]
+[profiles]
+  [[default]]
+    background_color = "#20202f"
+    font = UbuntuMono Nerd Font 12
+    foreground_color = "#c7b383"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#e01b24:#00aa00:#e5a50a:#1c71d8:#dc8add:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#f5c211:#3584e4:#c061cb:#55ffff:#ffffff"
+    use_system_font = False
+    bold_is_bright = True
+  [[Black on White]]
+    background_color = "#f0f0f0"
+    font = Monospace 10
+    foreground_color = "#000000"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#e01b24:#00aa00:#e5a50a:#1c71d8:#dc8add:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#f5c211:#3584e4:#c061cb:#55ffff:#ffffff"
+    use_system_font = False
+    bold_is_bright = True
+  [[Grey on Black]]
+    font = Monospace 10
+    foreground_color = "#cccccc"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#e01b24:#00aa00:#e5a50a:#1c71d8:#dc8add:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#f5c211:#3584e4:#c061cb:#55ffff:#ffffff"
+    use_system_font = False
+    bold_is_bright = True
+  [[White on Black]]
+    font = Monospace 10
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#e01b24:#00aa00:#e5a50a:#1c71d8:#dc8add:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#f5c211:#3584e4:#c061cb:#55ffff:#ffffff"
+    use_system_font = False
+    bold_is_bright = True
+  [[Dusk]]
+    background_color = "#20202f"
+    font = UbuntuMono Nerd Font 12
+    foreground_color = "#c7b383"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#000000:#e01b24:#00aa00:#e5a50a:#1c71d8:#dc8add:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#f5c211:#3584e4:#c061cb:#55ffff:#ffffff"
+    use_system_font = False
+    bold_is_bright = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
