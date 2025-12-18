@@ -54,6 +54,9 @@ set shiftround
 set nowrap
 " -- ...but wrap text files
 au BufRead,BufNewFile *.txt,*.md set wrap linebreak nolist textwidth=0 wrapmargin=0
+" -- scroll offsets
+set scrolloff=0
+set sidescrolloff=0
 
 " -- use syntax fold method, but set the level so
 " -- high that it seems to be disabled
@@ -99,31 +102,18 @@ map <leader>U :set nocursorline<CR>
 
 set ruler
 
+filetype plugin indent on
+
 " -- syntax highlighting should be on
-syntax on
+" -- syntax on
+syntax enable
 let &t_Co=256
 
 " -- select a color scheme
 colorscheme desert
-" -- try to use blackboard - a non-standard color scheme
-silent! colorscheme blackboard
-" -- too much comments in our code, so fading them a bit
-highlight Comment ctermfg=242
+" -- try to use nilsa color scheme
+silent! colorscheme nilsa
 
-" -- dark gray separators in splits and folds
-highlight VertSplit ctermfg=234 ctermbg=242
-highlight StatusLine ctermfg=238 ctermbg=white
-highlight StatusLineNC ctermfg=238 ctermbg=white
-highlight Folded ctermfg=242 ctermbg=234
-
-" -- colors when using vimdiff
-highlight DiffAdd    ctermbg=22
-highlight DiffDelete ctermbg=124
-highlight DiffChange ctermbg=238
-highlight DiffText   ctermbg=242
-
-" -- mark column 100 & 120 in dark gray
-highlight ColorColumn ctermbg=236
 set colorcolumn=100,120
 " -- 80 & 100 for python
 au BufNewFile,BufRead,BufEnter
@@ -177,18 +167,26 @@ map <leader>s <C-T>
 map <C-Up> <C-T>
 
 " -- resizing
-map <S-Up> <cmd>resize +2<CR>
-map <S-Down> <cmd>resize -2<CR>
-map <S-Left> <cmd>vertical resize -2<CR>
-map <S-Right> <cmd>vertical resize +2<CR>
+map <S-Up> <cmd>resize +1<CR>
+map <S-Down> <cmd>resize -1<CR>
+map <S-Left> <cmd>vertical resize -1<CR>
+map <S-Right> <cmd>vertical resize +1<CR>
 
 inoremap <Nul> <C-n>
 
 " -- toggle taglist browser
 map <leader>T :TlistToggle<CR>
-" -- toggle NERDTree
+" -- initial size
+let g:Tlist_WinWidth=40
+
+" -- NERDTree
+" -- toggle
 map <leader>e :NERDTreeToggle<CR>
 map <leader>t :NERDTreeToggle<CR>
+" -- show current file
+map <leader>n :NERDTreeFind<CR>
+" -- initial size
+let g:NERDTreeWinSize=40
 
 " -- don't scan #include files for symbols
 set complete-=i
@@ -219,14 +217,14 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " -----------------------------------------------
 " -- build results in quickfix list
 " -----------------------------------------------
-set makeprg=rustc
+set makeprg=cargo
 fun! VimBuild()
     " clear quickfix list
     call setqflist([])
     " clear scratch buffer without echoing "Press ENTER..."
     silent! !clear
     silent! !echo "Building..."
-    make
+    make build --all-features
     " open quickfix list if it has any content
     cwindow 14
 endfun
@@ -306,7 +304,7 @@ autocmd BufNewFile,BufRead,BufEnter ?akefile* set noexpandtab
 autocmd BufNewFile,BufRead,BufEnter *.go set noexpandtab
 
 " -- turn off syntax highlighting for markdown files
-" autocmd BufEnter *.md set syn=off
+autocmd BufEnter *.md set syn=off
 
 " -- remove blanks at end of line
 map <leader>B :s:\s*$::<CR>
