@@ -11,7 +11,7 @@ highlight Normal ctermfg=152
 highlight Comment ctermfg=248
 highlight Constant ctermfg=71
 highlight LineNr ctermfg=240
-highlight Type ctermfg=112
+highlight Type ctermfg=114
 highlight Special ctermfg=246
 highlight Identifier ctermfg=36
 highlight Function ctermfg=36
@@ -41,3 +41,14 @@ highlight DiffAdd    ctermbg=22
 highlight DiffDelete ctermbg=124
 highlight DiffChange ctermbg=238
 highlight DiffText   ctermbg=242
+
+" Rust
+highlight rustArrowCharacter ctermfg=66
+highlight rustAsync          ctermfg=145
+highlight rustAwait          ctermfg=145
+highlight rustEnum           ctermfg=106
+highlight rustEnumVariant    ctermfg=107
+highlight rustOperator       ctermfg=66
+highlight rustPanic          ctermfg=208
+highlight rustQuestionMark   ctermfg=208
+highlight rustUnsafeKeyword  ctermfg=208
